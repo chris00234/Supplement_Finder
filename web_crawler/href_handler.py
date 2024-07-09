@@ -33,13 +33,14 @@ def parse_url_title(li):
 def main():
     file = "gnc.html"
     li = fetch_url(file)
-    save_file = "all_url.txt"
+    save_file = "url_only.txt"
     href_li = parse_url_href(li)
     title_li = parse_url_title(li)
     
     with open(save_file, "w") as f:
         for i in range(len(href_li)):
-            f.write(href_li[i] + " " + title_li[i] + "\n")
+            # f.write(href_li[i] + " " + title_li[i] + "\n")
+            f.write(href_li[i] + "\n")
 
 if __name__ == '__main__':
     main()

@@ -1,19 +1,11 @@
-import requests
-import bs4 as bs
+from bs4 import BeautifulSoup
+from selenium import webdriver
 
-def get_html(url):
-    response = requests.get(url)
-    soup = bs(response.text, 'html.parser')
-    return soup
-
-
-def main():
-    url = 'https://www.gnc.com/multivitamins-for-men/201412.html#q=multivitamin&start=1'
-    html = get_html(url)
-    file = "gnc.html"
-    with open(file, "w") as f:
-        f.write(html.prettify())
-    # print(html)
-
-if __name__ == '__main__':
-    main()
+driver = webdriver.Firefox()
+url = "https://www.gnc.com/vitamins-supplements/?start=0&sz=1260&sizeAdjusted=true"
+driver.get(url)
+soup = BeautifulSoup(driver.page_source, 'html.parser')
+driver.quit()
+file = "gnc.html"
+with open(file, "w") as f:
+    f.write(soup.prettify())
