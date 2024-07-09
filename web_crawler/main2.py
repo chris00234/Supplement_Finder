@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 
 driver = webdriver.Firefox()
-url = "https://www.gnc.com/multivitamins-for-men/201412.html#q=multivitamin&start=1"
+url = "https://www.gnc.com/vitamins-supplements/?start=0&sz=1260&sizeAdjusted=true"
 driver.get(url)
 soup = BeautifulSoup(driver.page_source, 'html.parser')
 driver.quit()
