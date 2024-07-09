@@ -1,12 +1,29 @@
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
+import random
+from fake_useragent import UserAgent
+
+def get_random_user_agent():
+    ua = UserAgent()
+    return ua.random
+
+def get_driver():
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument(f"user-agent={get_random_user_agent()}")
+    driver = webdriver.Chrome(options=options)
+    return driver
+
 
 def fetching_ingredient(file):
     with open(file, "r") as f:
         line = f.readline()
-        driver = webdriver.Firefox()
         while line:
+            driver = get_driver()
             driver.get(line)
+            time.sleep(random.uniform(1,5))
             soup = BeautifulSoup(driver.page_source, 'html.parser')
             print(soup.prettify())
             line = f.readline()
