@@ -18,16 +18,22 @@ def get_driver():
 
 
 def fetching_ingredient(file):
+    file2 = "products.html"
     with open(file, "r") as f:
-        line = f.readline()
-        while line:
-            driver = get_driver()
-            driver.get(line)
-            time.sleep(random.uniform(1,5))
-            soup = BeautifulSoup(driver.page_source, 'html.parser')
-            print(soup.prettify())
+        with open(file2, "w") as f2:
             line = f.readline()
+            while line:
+                driver = get_driver()
+                driver.get(line)
+                time.sleep(random.uniform(1,5))
+                soup = BeautifulSoup(driver.page_source, 'html.parser')
+                tb = soup.find_all("td",class_="data")
+                f2.write(tb)
+                    
+                line = f.readline()
         driver.quit()
+
+
 
 def main():
     file = "url_only.txt"
