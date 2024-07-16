@@ -22,6 +22,7 @@ def get_driver():
 def fetching_ingredient(file):
     file2 = "product.html"
     product_dict = {}
+    num = 0
     with open(file, "r") as f:
         with open(file2, "w") as f2:
             line = f.readline()
@@ -32,31 +33,32 @@ def fetching_ingredient(file):
 
                 driver = get_driver()
                 driver.get(url)
-                time.sleep(random.uniform(3, 7))  # More random sleep time
+                # time.sleep(random.uniform(3, 7))  # More random sleep time
                 soup = BeautifulSoup(driver.page_source, 'html.parser')
-                tb = soup.find_all("td", class_="data")
-                ingredients = []
-                for td in tb:
-                    if td.find('b') or td.find('strong'):
-                        continue
-                    # Extract ingredient name
-                    ingredient_name = td.get_text(strip=True)
-                    amount_per_serving = ""
-
-                    next_td = td.find_next_sibling("td", class_="data")
-                    if next_td:
-                        amount_per_serving = next_td.get_text(strip=True)
-                    
-                    if ingredient_name:
-                        ingredients.append(f"{ingredient_name}: {amount_per_serving}")
-                
-                print(ingredients)
-                # f2.write(url + " " + title + '\n')
-                # f2.write(str(tb))
-                # f2.write('\n\n')
+                tb = soup.find_all("td", class_="data", valign="top")
+                ingredient = {}
+                ing = ""
+                for i in tb:
+                    if str(i).startswith("<td class=\"data\" valign=\"top\">"):
+                        ing = i.get_text().strip()
+                        ingredient[i.get_text().strip()] = ""
+                    elif ing == "":
+                        print("fuck")
+                        break
+                    elif str(i).startswith("<td align=\"right\" class=\"data\" nowrap=\"nowrap\" valign=\"top\">") and not i.get_text().endswith("%") and ingredient[ing] == "":
+                        ingredient[ing] = i.get_text().strip()
+                    elif str(i).startswith("<td align=\"right\" class=\"data\" valign=\"top\">") and ingredient[ing] == "":
+                        ingredient[ing] = i.get_text().strip()
+                product_dict[title] = ingredient
+                # print(product_dict[title])
+                # print("--" * 50)
                 driver.quit()
                 line = f.readline()
-            f2.write(product_dict)
+                num += 1
+                # if num == 20:
+                #     break
+            # f2.write(product_dict)
+    print(product_dict)
 
 def main():
     file = "all_url.txt"
