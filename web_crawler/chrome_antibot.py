@@ -23,9 +23,9 @@ def get_driver():
 def fetching_ingredient(file):
     file2 = "product.json"
     product_dict = {}
-    # num = 0
+    num = 0
     with open(file, "r") as f:
-        with open(file2, "w") as f2:
+        with open(file2, "a") as f2:
             line = f.readline()
             while line:
                 line_ = line.split(' ')
@@ -55,11 +55,12 @@ def fetching_ingredient(file):
                 # print("--" * 50)
                 driver.quit()
                 line = f.readline()
-                # num += 1
-                # if num == 10:
-                #     break
+                num += 1
+                print(f"current url num = #{num}")
+                if num % 30 == 0:
+                    json.dump(product_dict,f2, indent=4)
             
-            json.dump(product_dict,f2, indent=4)
+            
 
     # print(product_dict)
 
