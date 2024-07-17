@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 import time
 import random
+import json
 from fake_useragent import UserAgent
 import undetected_chromedriver as uc
 
@@ -20,17 +21,17 @@ def get_driver():
     return driver
 
 def fetching_ingredient(file):
-    file2 = "product.html"
+    file2 = "product.json"
     product_dict = {}
-    num = 0
+    # num = 0
     with open(file, "r") as f:
         with open(file2, "w") as f2:
             line = f.readline()
             while line:
                 line_ = line.split(' ')
                 url = line_[0]
-                title = "".join(line_[1:])
-
+                title = "".join(line_[1:]).strip()
+                
                 driver = get_driver()
                 driver.get(url)
                 # time.sleep(random.uniform(3, 7))  # More random sleep time
@@ -54,11 +55,13 @@ def fetching_ingredient(file):
                 # print("--" * 50)
                 driver.quit()
                 line = f.readline()
-                num += 1
-                # if num == 20:
+                # num += 1
+                # if num == 10:
                 #     break
-            # f2.write(product_dict)
-    print(product_dict)
+            
+            json.dump(product_dict,f2, indent=4)
+
+    # print(product_dict)
 
 def main():
     file = "all_url.txt"

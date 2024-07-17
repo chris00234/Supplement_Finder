@@ -2,3 +2,4 @@ beautifulsoup4
 requests
 selenium
 fake_useragent
+pymongo
