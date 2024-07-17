@@ -10,3 +10,15 @@ conda activate sup
 ```
 pip install -r requirements.txt
 ```
+
+### download npm and create react app
+'''
+sudo apt install npm
+npm create vite@latest
+choose React and JS
+cd into new directory
+
+npm install
+npm run dev <runs on local host for testing>
+
+'''

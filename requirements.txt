@@ -3,3 +3,5 @@ requests
 selenium
 fake_useragent
 pymongo
+
+#sudo apt install npm

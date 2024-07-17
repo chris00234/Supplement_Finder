@@ -1,0 +1,24 @@
+{
+  "name": "supplement_finder",
+  "version": "1.0.0",
+  "description": "### Setup Conda envs ``` conda create -n sup python=3.10 conda activate sup ```",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chris00234/Supplement_Finder.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chris00234/Supplement_Finder/issues"
+  },
+  "homepage": "https://github.com/chris00234/Supplement_Finder#readme",
+  "dependencies": {
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1"
+  }
+}
