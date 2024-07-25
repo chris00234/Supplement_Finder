@@ -39,7 +39,7 @@ def main():
     
     with open(save_file, "w") as f:
         for i in range(len(href_li)):
-            # f.write(href_li[i] + " " + title_li[i] + "\n")
+            f.write(href_li[i] + " " + title_li[i] + "\n")
             f.write(href_li[i] + "\n")
 
 if __name__ == '__main__':
